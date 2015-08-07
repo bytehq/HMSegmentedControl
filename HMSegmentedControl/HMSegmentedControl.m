@@ -235,12 +235,10 @@
 }
 
 - (NSAttributedString *)attributedTitleAtIndex:(NSUInteger)index {
-    id title = self.sectionTitles[index];
+    NSString *title = self.sectionTitles[index];
     BOOL selected = (index == self.selectedSegmentIndex) ? YES : NO;
     
-    if ([title isKindOfClass:[NSAttributedString class]]) {
-        return (NSAttributedString *)title;
-    } else if (!self.titleFormatter) {
+    if (!self.titleFormatter) {
         NSDictionary *titleAttrs = selected ? [self resultingSelectedTitleTextAttributes] : [self resultingTitleTextAttributes];
         
         // the color should be cast to CGColor in order to avoid invalid context on iOS7
@@ -407,8 +405,8 @@
                 textWidth = [self.segmentWidthsArray[idx] floatValue];
             }
             
-            CGFloat imageYOffset = roundf((CGRectGetHeight(self.frame) - self.selectionIndicatorHeight) / 2.0f);
-            CGRect imageRect = CGRectMake(imageXOffset, imageYOffset, imageWidth, imageHeight);
+            __unused CGFloat imageYOffset = roundf((CGRectGetHeight(self.frame) - self.selectionIndicatorHeight) / 2.0f);
+            CGRect imageRect = CGRectMake(self.segmentWidth / 2 - imageWidth / 2, self.frame.size.height / 2 - imageHeight / 2 - 2, imageWidth, imageHeight);
             CGRect textRect = CGRectMake(textXOffset, yOffset, textWidth, stringHeight);
             
             // Fix rect position/size to avoid blurry labels
