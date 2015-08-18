@@ -423,6 +423,11 @@
 
             if ([self.sectionTitles[idx] length] > 0) {
                 imageLayer.frame = CGRectOffset(imageLayer.frame, -imageRect.size.width / 2, 0);
+
+                if ([self.sectionTitles[idx] length] > 1) {
+                    imageLayer.frame = CGRectOffset(imageLayer.frame, -1.5, 0);
+                    titleLayer.frame = CGRectOffset(titleLayer.frame, 1.5, 0);
+                }
             }
 
             if (self.selectedSegmentIndex == idx) {
